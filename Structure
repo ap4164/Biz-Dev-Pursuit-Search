@@ -1,0 +1,12 @@
+pgh-sustainability-scout/
+├── scrapers/
+│   ├── beacon_pgh.py       # City of Pittsburgh (OpenGov)
+│   ├── ura_ionwave.py      # Urban Redevelopment Authority
+│   └── pennbid_pgh.py      # Regional A&E opportunities
+├── engine/
+│   ├── analyzer.py         # Gemini API calls for sustainability grading
+│   └── filter.py           # Keyword & location logic
+├── data/                   # JSON/CSV storage of found RFPs
+├── .env                    # API Keys (DON'T UPLOAD TO GITHUB)
+└── main.py                 # The Orchestrator
+
