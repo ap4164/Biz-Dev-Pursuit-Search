@@ -4,14 +4,6 @@ we will receive a synthesis of information through an email blast. That same syn
 
 ##PSEUDOCODE##
 
-Order of Functions
-1) The Scraper (Discovery via Gemini Auto Browse)
-Instead of a script, you use the Gemini Side Panel in Chrome.
-
-Part A (The Links): You provide Gemini with a "Master List" of URLs (URA, Beacon, PennBid).
-
-Part B (The Scrub): You give Gemini a System Instruction-> "Every Monday, use 'Auto Browse' to visit these x URLs. Look for new headlines or links added since [Last Date]. Only pull the URL of the new posting; do not download the PDF yet."
-
 a) Geography: Priority zones (Hazelwood, Uptown, Larimer).
 
 b) Mission: Keywords like "Sustainability," "Equity," "Inclusion."
@@ -32,23 +24,28 @@ i) Deadlines: AI calculates "Due Date - Today's Date" to ensure it’s within th
 
 k) Roles: AI identifies if the RFP asks for a "Lead Architect" (Prime) or a "Sustainability Consultant" (Sub).
 
-Part C (The Initial List): Gemini generates a table in the side panel showing the Link, the Score, and the Rationale.
+1) Automated Scraper (Headless Agent)
 
-1d) Human Review (The Safety Valve)
-You review the table Gemini just built.
+a) Trigger: Weekly scheduled "ping" via Zapier.
 
-If a link looks credible, you say: "Gemini, proceed with Step 2 for rows 1, 3, and 5."
+b) Scrub: Gemini API visits links (No login needed if the portal is public-facing).
 
-2) Synthesis (The Deep Read)
-Gemini then clicks those specific links.
+c) Scoring Engine: Factors a-k are applied by Gemini during the browse session.
 
-Synthesis: It reads the page content (and any immediate text) to confirm if it meets your "Prime/Sub" and "Certification" requirements.
+d) Initial Mapping: New links/titles are pushed to Airtable "Inbox."
 
-Strike Out: Gemini checks its own history. If it previously summarized a link for you, it will flag it as a duplicate.
+e) Strike Out: Automated redundancy check against existing Airtable URLs.
 
-3) Airtable & Zapier Integration
-This is where the only "setup" happens.
+2) Human Credibility Review
 
-Airtable: You use the Gemini "Google Workspace" Extension.
+Staff checks the "Approved" box in Airtable for high-quality leads.
 
-Action: You tell Gemini: "Now, take this finalized list and send it to my 'Pursuits' Airtable." * Zapier: Zapier monitors your Airtable. When it sees a new row, it triggers your Weekly Blast email automatically.
+3) Automated Synthesis
+
+Checking the box triggers Gemini to do a "Deep Read" of that specific link.
+
+Populates Airtable with Prime/Sub roles and certification requirements.
+
+4) Automated Weekly Blast
+
+Zapier bundles all approved data into a formatted email blast.
