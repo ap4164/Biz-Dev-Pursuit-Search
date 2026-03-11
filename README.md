@@ -8,7 +8,7 @@ a) Geography: Priority zones (Hazelwood, Uptown, Larimer).
 
 b) Mission: Keywords like "Sustainability," "Equity," "Inclusion."
 
-c) Sector: "Adaptive Reuse," "Urban Infill," "Municipal."
+c) Sectors
 
 d) PGH Specifics: "Climate Action Plan 3.0," "2030 District."
 
