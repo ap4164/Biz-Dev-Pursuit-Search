@@ -5,28 +5,50 @@ we will receive a synthesis of information through an email blast. That same syn
 ##PSEUDOCODE##
 
 Order of Functions
-1) Scraper--> first part of function will scrub the internet, second part of function will scrub portals,
-   a) for each procurement portal, use username and password env file to login to procurement portals
-   b) scraper engine:
-       factors important to consider:
-         x geography (city, county, state, region)
-         y mission statement words ()
-         z studio specific keywords ()
-         aa pgh specific keywords()
-         ## what other keywords should be considered?
-         ## among the types of keywords (factors), which ones are a priority? --> make a scoring dictionary/matrix for each'
-      gemini call to read RFP
-      create a list of the RFPs have x, y and z and scores they have + a brief description of what the RFP entail
-        ensure that rfp gets information that can be mapped onto the table (list fields)
-      if there is redundancy between list from a previous week to current, strike out. 
-   
-3) Airtable Integration --> Based on brief description, link field (keywords) to content (key values)
-   def send_to_airtable(project_data):
-    payload = {
-        "records": [{
-            "fields": {
-                "Project Name": project_data['title'],
-                "Full Description": project_data['description'],
-                "Source": "URA Portal"
-5) Zapier--> Weekly Blast text formatting
-   a) use end product of scraper engine + tell zapier to reformat these in the form of an email blast-- send to (provide list of emails)
+1) The Scraper (Discovery via Gemini Auto Browse)
+Instead of a script, you use the Gemini Side Panel in Chrome.
+
+Part A (The Links): You provide Gemini with a "Master List" of URLs (URA, Beacon, PennBid).
+
+Part B (The Scrub): You give Gemini a System Instruction-> "Every Monday, use 'Auto Browse' to visit these x URLs. Look for new headlines or links added since [Last Date]. Only pull the URL of the new posting; do not download the PDF yet."
+
+a) Geography: Priority zones (Hazelwood, Uptown, Larimer).
+
+b) Mission: Keywords like "Sustainability," "Equity," "Inclusion."
+
+c) Sector: "Adaptive Reuse," "Urban Infill," "Municipal."
+
+d) PGH Specifics: "Climate Action Plan 3.0," "2030 District."
+
+e) Theme: "Passive House," "Mass Timber," "Net-Zero."
+
+f) Govt Classification: City, County, URA, Housing Authority.
+
+g) Certifications: MWDBE/WBE requirements.
+
+h) Team Reqs: PHIUS, LEED AP, specific PM experience.
+
+i) Deadlines: AI calculates "Due Date - Today's Date" to ensure it’s within the 10-60 day window.
+
+k) Roles: AI identifies if the RFP asks for a "Lead Architect" (Prime) or a "Sustainability Consultant" (Sub).
+
+Part C (The Initial List): Gemini generates a table in the side panel showing the Link, the Score, and the Rationale.
+
+1d) Human Review (The Safety Valve)
+You review the table Gemini just built.
+
+If a link looks credible, you say: "Gemini, proceed with Step 2 for rows 1, 3, and 5."
+
+2) Synthesis (The Deep Read)
+Gemini then clicks those specific links.
+
+Synthesis: It reads the page content (and any immediate text) to confirm if it meets your "Prime/Sub" and "Certification" requirements.
+
+Strike Out: Gemini checks its own history. If it previously summarized a link for you, it will flag it as a duplicate.
+
+3) Airtable & Zapier Integration
+This is where the only "setup" happens.
+
+Airtable: You use the Gemini "Google Workspace" Extension.
+
+Action: You tell Gemini: "Now, take this finalized list and send it to my 'Pursuits' Airtable." * Zapier: Zapier monitors your Airtable. When it sees a new row, it triggers your Weekly Blast email automatically.
